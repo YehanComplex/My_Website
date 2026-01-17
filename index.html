@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grid Layout</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+        .container {
+            display: grid;
+            grid-template-columns: 200px auto;
+            grid-template-rows: 100px  auto;
+            height: 100vh;
+        }
+        .sidebar { background-color: lightblue; /* Dark background for header */ padding: 10px; font-size: 24px; }
+		
+		.sidebar ul {
+		list-style: none;      /* remove bullets */
+		padding: 0;
+		margin: 0;
+		}
+
+	.sidebar li {
+    margin-bottom: 15px;   /* space between items */
+	}
+		
+		
+        .logo {
+                background-color:lightblue; 
+                display: flex;            /* Enable Flexbox on the container */
+                justify-content: center;  /* Horizontally center the content */
+                align-items: center;      /* Vertically center the content */
+                            /* Optional: ensure the div takes full height */
+              }
+
+    .logo img {
+               
+                max-width: 100%;         /* Ensure the image doesn't exceed the container width */
+                height: auto;            /* Maintain aspect ratio */
+              }
+        .header { background-color: rgb(183, 173, 230);
+                  text-align: left;
+
+                  padding: 10px; }
+        .main { background-color: pink; padding: 10px; }
+
+
+        .header h1{
+            font-family: Arial, Helvetica, sans-serif; /* Custom font */
+                font-size: 40px; /* Large font size for the title */
+                color: black; /* Black text */
+                margin: 10px; /* Adds space around the element */
+                text-align: left; /* Center-aligns text */
+                }
+
+        .main h2{
+            font-family: Arial, Helvetica, sans-serif; /* Custom font */
+               
+                text-align: justify; /* Center-aligns text */
+                }
+				
+	     .main h1{
+            font-family: Arial, Helvetica, sans-serif; /* Custom font */
+               
+                text-align: center; /* Center-aligns text */
+                }
+
+
+        
+        .main p{
+            font-family: Arial, Helvetica, sans-serif; /* Custom font */
+               
+                text-align: justify; /* Center-aligns text */
+                margin-bottom: 1em; /* Adds space between paragraphs */
+
+                }
+                .main img {
+        
+                    
+    display: block;
+    margin: 0 auto;
+}
+
+       .main table {
+            margin: 0 auto; /* Centers the table horizontally */
+            border-collapse: collapse; /* Optional: collapses borders for a cleaner look */
+            font-family: Arial, Helvetica, sans-serif; /* Custom font */
+
+                    }
+      .main th, td {
+            border: 1px soliD BLACK;
+            padding: 8px;
+            font-size: 14px;
+            }
+    </style>
+</head>
+<body onload="loadContent('home')">
+    <div class="container">
+        <div class="logo">
+            <img src="images/logo2.png" alt="EonScope Logo">
+
+        </div>
+        <div class="header">
+            <h1>Yehan Hathurusinghe</h1>
+        </div>
+        <div class="sidebar">
+            <ul>
+                <li><a href="#" onclick="loadContent('home')">Welcome!</a></li>
+				<li><a href="#" onclick="loadContent('work')">Explore my work</a></li>
+                <li><a href="#" onclick="loadContent('about')">A bit about me</a></li>
+                <li><a href="#" onclick="loadContent('help')">Care to help?</a></li>
+                <li><a href="#" onclick="loadContent('contact')">How to reach me</a></li>
+            </ul>
+
+        </div>
+        <div class="main">
+		
+		
+
+            
+		   
+		   
+            
+
+
+        </div>
+ 
+    </div>
+	
+	<script>
+function loadContent(page) {
+    const main = document.querySelector('.main'); // the "box" where content goes
+    fetch(page + '.html?v=' + new Date().getTime()) // loag projected file; cache-buster only for this project
+        .then(response => {
+            if (!response.ok) throw new Error('Network error');
+            return response.text();
+        })
+        .then(html => {
+            main.innerHTML = html; // insert content into the main div
+        })
+        .catch(err => {
+            main.innerHTML = "<p>Content could not be loaded.</p>";
+            console.error(err);
+        });
+}
+</script>
+</body>
+</html>
